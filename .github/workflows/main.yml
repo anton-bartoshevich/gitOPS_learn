@@ -1,7 +1,5 @@
 name: Count tabs in changd files
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -16,7 +14,7 @@ jobs:
           id: changed-files
           uses: tj-actions/changed-files@v35
         
-        - name: List all changed files
+        - name: Found tabs in the files
           run: |
                for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
                echo "The $file has `grep -P '\t' $file | wc -l` tabs" >> report.log
