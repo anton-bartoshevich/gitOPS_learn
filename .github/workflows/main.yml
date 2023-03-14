@@ -1,26 +1,18 @@
-name: Count tabs in changed files
+name: Gittag
 on:
-  pull_request:
-    branches: [ "main" ]
+  push:
+    branches:
+      - "main"
 jobs:
-  my_action:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-          with:
-            fetch-depth: 0
-        - name: Get changed files
-          id: changed-files
-          uses: tj-actions/changed-files@v35      
-        - name: Found tabs in the files
-          run: |
-               for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-               echo "The $file has `grep -P '\t' $file | wc -l` tabs" >> report.log
-               done        
-        - name: Upload report
-          uses: actions/upload-artifact@v2
-          with:
-           path: report.log
-          
-          
-          
+  Gittag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git get tag
+      - uses: little-core-labs/get-git-tag@v3.0.1
+        id: tagName
+      - name: Some other step
+        with:
+          tagname: ${{ steps.tagName.outputs.tag }}
+      - name: Yet another steз
+        run: |
+         echo $GIT_TAG_NAME
