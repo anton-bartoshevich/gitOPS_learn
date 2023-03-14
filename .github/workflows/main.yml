@@ -2,15 +2,14 @@ name: Gittag
 on:
   push:
     branches:
-      - "main"
+      - "dev"
 jobs:
-  Gittag:
+  Git_tag:
     runs-on: ubuntu-latest
     steps:
       - name: Git get tag
-      - uses: little-core-labs/get-git-tag@v3.0.1
+        uses: little-core-labs/get-git-tag@v3.0.1
         id: tagName
-      - name: Some other step
         with:
           tagname: ${{ steps.tagName.outputs.tag }}
       - name: Yet another steз
